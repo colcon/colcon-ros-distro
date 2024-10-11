@@ -1,9 +1,11 @@
 apache
 colcon
+distro
+https
 iterdir
 linter
 pathlib
-pydocstyle
+pycqa
 pytest
 scspell
 setuptools
