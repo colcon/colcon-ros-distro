@@ -11,6 +11,16 @@ from rosdistro.distribution_cache_generator import generate_distribution_cache
 import yaml
 
 
+# Configure tests to use the 'files' backend by default, regardless of
+# the global git configuration. Older git versions do not support the
+# '--ref-format' argument to 'git init', but they will ignore this
+# configuration parameter, ensuring backward compatibility.
+os.environ['GIT_CONFIG_PARAMETERS'] = (
+    os.environ.get('GIT_CONFIG_PARAMETERS', '') +
+    " 'init.defaultRefFormat=files'"
+).strip()
+
+
 def _create_package(path, manifest):
     (path / 'package.xml').write_text(manifest)
     with mock.patch.dict(os.environ, {
